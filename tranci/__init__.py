@@ -19,6 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
 import sys
+from enum import Enum
 from typing import Union
 
 if sys.platform == "win32":
@@ -46,7 +47,29 @@ class BaseText(str):
         """
         Returns the text provided in the same style. Useful for saving colors and reusing them over and over again.
         """
+
         return BaseText.__new__(BaseText, self.code, text)
+
+
+class Hyperlink(str):
+    """
+    Bet you didn't know this was a thing! Yeah, it's real. Hyperlinks. In a terminal. Crazy. Just be aware that this is not too standard.
+    """
+
+    def __new__(cls, url: str, text: Union[str, BaseText, None] = None):
+        if text is None:
+            return super().__new__(cls)
+        return super().__new__(cls, f"\033]8;;{url}\033\\{text}\033]8;;\033")
+
+    def __init__(self, url: str, text: Union[str, BaseText, None] = None):
+        self.url = url
+
+    def __call__(self, text: str):
+        """
+        Why are you doing this with hyperlinks
+        """
+
+        return Hyperlink.__new__(Hyperlink, self.url, text)
 
 
 class Bold(BaseText):
@@ -349,3 +372,74 @@ class BGHEX(BGRGB):
         if isinstance(hexa, str):
             hexa = int(hexa.replace("#", ""), 16)
         super().__init__((hexa >> 16) & 255, (hexa >> 8) & 255, hexa & 255)
+
+
+class Direction(Enum):
+    UP = "A"
+    DOWN = "B"
+    RIGHT = "C"
+    LEFT = "D"
+
+
+def move_cursor_dir(dir: Direction, lines: int, do_print: bool = True):
+    code = f"\033[{lines}{dir.value}"
+    if do_print:
+        print(code, end="")
+    return code
+
+
+def move_cursor_pos(row: int, col: int, do_print: bool = True):
+    """
+    move_cursor_pos(1, 1) will move the cursor to the top left corner.
+    """
+
+    code = f"\033[{row};{col}H"
+    if do_print:
+        print(code, end="")
+    return code
+
+
+def save_cursor_pos(do_print: bool = True):
+    """
+    Tells the terminal emulator to save the current position for later use during the current session.
+    """
+
+    code = "\033[s"
+    if do_print:
+        print(code, end="")
+    return code
+
+
+def restore_cursor_pos(do_print: bool = True):
+    """
+    Tells the terminal emulator to move the cursor back to the last saved position.
+    """
+
+    code = "\033[u"
+    if do_print:
+        print(code, end="")
+    return code
+
+
+def set_cursor_visibility(visible: bool, do_print: bool = True):
+    if visible:
+        code = "\033[?25h"
+    else:
+        code = "\033[?25l"
+    if do_print:
+        print(code, end="")
+    return code
+
+
+def clear_screen(do_print: bool = True):
+    code = "\033[2K"
+    if do_print:
+        print(code, end="")
+    return code
+
+
+def clear_line(do_print: bool = True):
+    code = "\033[2J"
+    if do_print:
+        print(code, end="")
+    return code
