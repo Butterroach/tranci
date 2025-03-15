@@ -45,11 +45,13 @@ def main():
 
     print(
         tranci.Red(
-            f"This is red text, but {tranci.Blue('this is blue')}. And the rest is red."
+            f"This is red text, but {tranci.Blue('this is blue')}. And the rest is red"
         )
     )
 
-    print(tranci.RGB("This is custom RGB color text", 255, 165, 0))
+    print(tranci.RGB(255, 165, 0, "This is custom RGB color text"))
+    print(tranci.HEX("#AFCBED", "This is custom HEX color text with str"))
+    print(tranci.HEX(0xEFEABD, "This is custom HEX color text with int"))
     print(
         tranci.Bold(
             tranci.Italicized(
@@ -65,10 +67,17 @@ def main():
     for hue in range(360):
         r, g, b = colorsys.hsv_to_rgb(hue / 360, 1, 1)
         r, g, b = r * 255, g * 255, b * 255
-        print(tranci.RGB(f"Rainbow!!", r, g, b), end="\r")
+        print(tranci.RGB(r, g, b, f"Rainbow!!"), end="\r")
         time.sleep(0.005)
 
     print()
+
+    warning = tranci.HEX("#fff374")
+
+    print(warning("This is a warning colored by saving a color and calling it"))
+    print(warning("Another warning!"))
+    print(tranci.Inverted(warning("And that's the inverted one!")))
+    print(tranci.BGHEX("#fff374", tranci.HEX(0, "Or if you wanna be real, I suppose.")))
 
 
 if __name__ == "__main__":
