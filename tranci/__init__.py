@@ -18,6 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import os
+import re  # tragedy
 import sys
 from enum import Enum
 from typing import Union
@@ -27,7 +28,7 @@ if sys.platform == "win32":
 
 RESET = "\033[0m"
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 
 class BaseText(str):
@@ -38,7 +39,16 @@ class BaseText(str):
     def __new__(cls, code: str, text: Union[str, None] = None):
         if text is None:
             return super().__new__(cls)
-        return super().__new__(cls, code + text.replace(RESET, code) + RESET)
+        return super().__new__(
+            cls,
+            code
+            + re.sub(
+                r"\r\n|\n",
+                lambda m: f"{RESET}{m.group(0)}{code}",
+                text.replace(RESET, code),
+            )
+            + RESET,
+        )
 
     def __init__(self, code: str, text: str = None):
         self.code = code
