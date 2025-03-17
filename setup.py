@@ -1,9 +1,10 @@
+from . import tranci
 from setuptools import setup, find_packages
 from pathlib import Path
 
 setup(
     name="tranci",
-    version="1.0.0",
+    version=tranci.__version__,
     description="Tranci: a no-dependencies, lightweight, easy-to-use ANSI library",
     long_description=(Path(__file__).parent / "README.md").read_text(encoding="utf-8"),
     long_description_content_type="text/markdown",
