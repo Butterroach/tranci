@@ -38,7 +38,7 @@ You can figure out everything else just by looking at your IDE's autocomplete! (
 ## Ok but ~~[that one clone of a JS library that shall not be named]~~ exists
 
 -   It's a clone of a JS library. What do you think?
--   `tranci` has almost everything ~~[that one clone of a JS library that shall not be named]~~ has except fallbacks (and maybe the edge cases though I'm not sure what edge cases they're referring to).
+-   `tranci` has everything ~~[that one clone of a JS library that shall not be named]~~ has except fallbacks.
 -   You don't need fallbacks/capabilities-detection. It just adds bloat.
 -   Even if the JS clone is slightly lighter, `tranci` isn't just colors and styles and <font color="red"><u>**_~~oooo look at this bold italic striked underlined red text!!!~~_**</u></font>. It also supports a bit more general ANSI, in a more Pythonic extendable syntax. You can add your own ANSI things to `tranci` with the class system. Plus the world won't end if your project is 51.82KiB larger than it could be.
 
