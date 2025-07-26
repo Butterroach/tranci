@@ -59,4 +59,8 @@ setup(
         "Source": "https://github.com/Butterroach/tranci",
         "Bug Tracker": "https://github.com/Butterroach/tranci/issues",
     },
+    include_package_data=True,
+    package_data={
+        'package': ['py.typed'],
+    },
 )
