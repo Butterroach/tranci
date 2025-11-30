@@ -1,5 +1,5 @@
 """
-Tranci: a no-dependencies, lightweight, easy-to-use ANSI library
+tranci: a no-dependencies, lightweight, easy-to-use ANSI library
 
 Copyright (c) 2025 Butterroach
 
@@ -18,17 +18,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import colorsys
-import os
 import shutil
 import time
 import tranci
-from pathlib import Path
 
 if __name__ == "__main__":
+    r, g, b, = 1, 0, 0
+    hue = 0
     try:
         for hue in range(360):
-            r, g, b = colorsys.hsv_to_rgb(hue / 360, 1, 1)
-            r, g, b = r * 255, g * 255, b * 255
+            r, g, b = [int(x * 255) for x in colorsys.hsv_to_rgb(hue / 360, 1, 1)]
             print(tranci.RGB(r, g, b, f"tranci"), end="\r")
             time.sleep(0.01)
     except KeyboardInterrupt:
@@ -43,12 +42,12 @@ if __name__ == "__main__":
     for i in range(len(FOLLOWUP_1)):
         _r, _g, _b = colorsys.hsv_to_rgb(hue / 360, 1 - (i + 1) / len(FOLLOWUP_1), 1)
         _r, _g, _b = _r * 255, _g * 255, _b * 255
-        whitening_followup_1.append(tranci.RGB(_r, _g, _b, FOLLOWUP_1[i]))
+        whitening_followup_1.append(tranci.RGB(int(_r), int(_g), int(_b), FOLLOWUP_1[i]))
 
     for i in range(len(FOLLOWUP_2)):
         _r, _g, _b = colorsys.hsv_to_rgb(hue / 360, 1 - (i + 1) / len(FOLLOWUP_2), 1)
         _r, _g, _b = _r * 255, _g * 255, _b * 255
-        whitening_followup_2.append(tranci.RGB(_r, _g, _b, FOLLOWUP_2[i]))
+        whitening_followup_2.append(tranci.RGB(int(_r), int(_g), int(_b), FOLLOWUP_2[i]))
 
     try:
         for i in range(1, len(FOLLOWUP_1)):
@@ -66,7 +65,7 @@ if __name__ == "__main__":
 
     try:
         time.sleep(1)
-    except:
+    except KeyboardInterrupt:
         print(
             f"\r{tranci.RGB(r, g, b, 'tranci')}{''.join(whitening_followup_1)}",
             end="\r",

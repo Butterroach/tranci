@@ -1,5 +1,5 @@
 """
-Tranci: a no-dependencies, lightweight, easy-to-use ANSI library
+tranci: a no-dependencies, lightweight, easy-to-use ANSI library
 
 Copyright (c) 2025 Butterroach
 
@@ -28,7 +28,7 @@ if sys.platform == "win32":
 
 RESET: str = "\033[0m"
 
-__version__: str = "1.2.0"
+__version__: str = "1.3.0"
 
 
 class BaseText(str):
@@ -45,11 +45,12 @@ class BaseText(str):
             + re.sub(
                 r"\r\n|\n",
                 lambda m: f"{RESET}{m.group(0)}{code}",  # type: ignore
-                text.replace(RESET, code),
+                str(text).replace(RESET, code),
             )
             + RESET,
         ))
 
+    # noinspection PyUnusedLocal
     def __init__(self, code: str, text: Union[str, None] = None) -> None:
         self.code = code
 
