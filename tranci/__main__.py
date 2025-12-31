@@ -1,7 +1,7 @@
 """
 tranci: a no-dependencies, lightweight, easy-to-use ANSI library
 
-Copyright (c) 2025 Butterroach
+Copyright (c) 2025-2026 Butterroach
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by

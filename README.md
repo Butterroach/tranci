@@ -4,7 +4,7 @@
 
 ## What in the world is a "tranci"?
 
-`tranci` is a no-dependencies, lightweight, easy-to-use, Pythonic ANSI library. It officially supports Python 3.9-3.13. You can move the cursor around, do some colors. Idk, just general ANSI.
+`tranci` is a no-dependencies, lightweight, easy-to-use, Pythonic ANSI library. It officially supports Python 3.10-3.13. You can move the cursor around, do some colors. Idk, just general ANSI.
 
 ## How do I use this?
 
